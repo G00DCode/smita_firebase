@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "56770571972",
+    "project_id": "smita-41e67",
+    "storage_bucket": "smita-41e67.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:56770571972:android:0b947e3e5e797529682391",
+        "android_client_info": {
+          "package_name": "com.example.smita_firebase"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTA5L8e2ehrLbj1fWXIU8NGBnfsQei3ew"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
