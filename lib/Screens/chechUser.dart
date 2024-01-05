@@ -13,12 +13,12 @@ class CheckUser extends StatefulWidget {
 class _CheckUserState extends State<CheckUser> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return checkUser();
   }
 }
 
-checkUser()async{
-  final user=await FirebaseAuth.instance.currentUser;
+checkUser(){
+  final user=FirebaseAuth.instance.currentUser;
   if(user!=null){
     return HomeScreen();
   }

@@ -7,6 +7,7 @@ class UiHelper{
      padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 15),
      child: TextField(
        controller: controller,
+       obscureText: toHide,
        decoration: InputDecoration(
          hintText: text,
          suffixIcon: Icon(iconData),

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smita_firebase/Screens/signin_screen.dart';
@@ -20,10 +22,10 @@ class _SignUpState extends State<SignUp> {
     else{
       UserCredential? userCredential;
       try{
-        userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password).then((value) => UiHelper.CustomAlertBox("User Created", context));
+        userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password).then((value) {  log("User Created");});
       }
       on FirebaseAuthException catch(ex){
-        UiHelper.CustomAlertBox(ex.code.toString(), context);
+        log(ex.code.toString());
       }
 
 
@@ -48,7 +50,7 @@ class _SignUpState extends State<SignUp> {
           }, child: Text("Sign Up")),
           SizedBox(height: 15,),
           TextButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>SignInScreen()));
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignInScreen()));
           }, child: Text("Sign In")),
     
 
