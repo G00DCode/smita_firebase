@@ -19,5 +19,25 @@ class UiHelper{
    );
 
   }
+  static CustomAlertBox(String text,BuildContext context){
+    return AlertDialog(
+      title: Text(text),
+      actions: <Widget>[
+        TextButton(
+          child: const Text('OK'),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+
+        ),
+
+
+      ],
+
+    );
+
+
+  }
+
 
 }
