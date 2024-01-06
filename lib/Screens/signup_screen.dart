@@ -15,17 +15,28 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   TextEditingController emailController= TextEditingController();
   TextEditingController passwordController=TextEditingController();
+
+
   signUp(String email, String password)async{
     if(email==""&& password==""){
-      return UiHelper.CustomAlertBox("Enter Required Fields",context);
+
+          return UiHelper.CustomAlertBox("Enter Required Fields", context);
     }
     else{
       UserCredential? userCredential;
       try{
-        userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password).then((value) {  log("User Created");});
+        userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password).then((value) {
+
+              return UiHelper.CustomAlertBox("User Created", context);
+        });
       }
       on FirebaseAuthException catch(ex){
-        log(ex.code.toString());
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return UiHelper.CustomAlertBox(ex.code.toString(), context);
+          },
+        );
       }
 
 

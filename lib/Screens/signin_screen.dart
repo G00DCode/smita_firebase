@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:smita_firebase/Screens/forgot_passoword.dart';
 import 'package:smita_firebase/Screens/homescreen.dart';
 import 'package:smita_firebase/Screens/signup_screen.dart';
 import 'package:smita_firebase/Widgets/uihelper.dart';
@@ -18,7 +19,9 @@ class _SignInScreenState extends State<SignInScreen> {
   TextEditingController passwordController=TextEditingController();
   signIn(String email, String password)async{
     if(email==""&& password==""){
-      return UiHelper.CustomAlertBox("Enter Required Fields",context);
+
+          return UiHelper.CustomAlertBox("Enter Required Fields", context);
+
     }
     else{
       UserCredential? userCredential;
@@ -29,7 +32,9 @@ class _SignInScreenState extends State<SignInScreen> {
         });
       }
       on FirebaseAuthException catch(ex){
-        log(ex.code.toString());
+
+            return UiHelper.CustomAlertBox(ex.code.toString(), context);
+
       }
 
 
@@ -48,6 +53,12 @@ class _SignInScreenState extends State<SignInScreen> {
         children: [
           UiHelper.CustomTextField(emailController, Icons.email, "Enter Email", false),
           UiHelper.CustomTextField(passwordController, Icons.password, "Enter Password", true),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              TextButton(onPressed: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>ForgotPassword()));}, child: Text("Forgot Password?")),
+            ],
+          ),
           SizedBox(height: 20,),
           ElevatedButton(onPressed: (){
             signIn(emailController.text.toString(), passwordController.text.toString());
