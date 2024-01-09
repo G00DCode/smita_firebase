@@ -10,26 +10,21 @@ class AddData extends StatefulWidget {
 }
 
 class _AddDataState extends State<AddData> {
-  TextEditingController titlecontroller =TextEditingController();
-  TextEditingController descController= TextEditingController();
+  TextEditingController titlecontroller = TextEditingController();
+  TextEditingController descController = TextEditingController();
 
-  addData(String title, String desc)async{
-    if(title.isEmpty && desc.isEmpty){
+  addData(String title, String desc) async {
+    if (title.isEmpty && desc.isEmpty) {
       return UiHelper.CustomAlertBox("Enter required Fields", context);
-    }
-    else{
+    } else {
       FirebaseFirestore.instance.collection("Notes").doc(title).set({
-        "Title":title,
-        "Description":desc,
-
-      }).then((value){
+        "Title": title,
+        "Description": desc,
+      }).then((value) {
         UiHelper.CustomAlertBox("Data Inserted", context);
-
       });
     }
-
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,12 +36,19 @@ class _AddDataState extends State<AddData> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          UiHelper.CustomTextField(titlecontroller, Icons.title, "Enter Title", false),
-          UiHelper.CustomTextField(descController, Icons.description, "Enter Description", false),
-          SizedBox(height: 20,),
-          ElevatedButton(onPressed: (){
-            addData(titlecontroller.text.toString(), descController.text.toString());
-          }, child: Text("Add Data")),
+          UiHelper.CustomTextField(
+              titlecontroller, Icons.title, "Enter Title", false),
+          UiHelper.CustomTextField(
+              descController, Icons.description, "Enter Description", false),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: () {
+                addData(titlecontroller.text.toString(),
+                    descController.text.toString());
+              },
+              child: Text("Add Data")),
         ],
       ),
     );
