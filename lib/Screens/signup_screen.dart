@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smita_firebase/Screens/signin_screen.dart';
@@ -28,6 +29,12 @@ class _SignUpState extends State<SignUp> {
         userCredential=await FirebaseAuth.instance.createUserWithEmailAndPassword(email: email, password: password).then((value) {
 
               return UiHelper.CustomAlertBox("User Created", context);
+        }).then((value) {
+          FirebaseFirestore.instance.collection("Users").doc(email).set({
+            "Email":email,
+          }).then((value){
+            return UiHelper.CustomAlertBox("Data Inserted", context);
+        });
         });
       }
       on FirebaseAuthException catch(ex){

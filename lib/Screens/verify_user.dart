@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smita_firebase/Widgets/uihelper.dart';
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'otp_screen.dart';
 
 class VerifyUser extends StatefulWidget {
@@ -11,7 +11,7 @@ class VerifyUser extends StatefulWidget {
 }
 
 class _VerifyUserState extends State<VerifyUser> {
-  TextEditingController phoneController=TextEditingController();
+  TextEditingController phoneController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,12 +22,22 @@ class _VerifyUserState extends State<VerifyUser> {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          UiHelper.CustomTextField(phoneController, Icons.phone, "Enter Phone Number", false),
-          SizedBox(height: 20,),
-          ElevatedButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (context)=>OTPScreen()));
-
-          }, child: Text("Verify")),
+          UiHelper.CustomTextField(
+              phoneController, Icons.phone, "Enter Phone Number", false),
+          SizedBox(
+            height: 20,
+          ),
+          ElevatedButton(
+              onPressed: () async {
+                await FirebaseAuth.instance.verifyPhoneNumber(
+                    verificationCompleted: (PhoneAuthCredential credential) {},
+                    verificationFailed: (FirebaseAuthException ex) {},
+                    codeSent: (String verficationOTP, int? UIDtoken) {
+                      Navigator.push(context, MaterialPageRoute(builder: (context)=>OTPScreen(verficationOTP: verficationOTP,)));
+                    },phoneNumber: phoneController.text.toString(),
+                    codeAutoRetrievalTimeout: (String verficationOTP) {});
+              },
+              child: Text("Verify")),
         ],
       ),
     );
