@@ -31,6 +31,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
           FirebaseFirestore.instance.collection("Users").doc(email).set({
             "Email":email,
             "Username":name,
+            "Password":password,
 
 
           }).then((value) {
@@ -134,7 +135,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text( "Already have an account?",style: TextStyle(color: Colors.white),),
-                              TextButton(onPressed: (){},
+                              TextButton(onPressed: (){
+                                Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogInScreen()));
+                              },
                                 child:Text("Log In",style: TextStyle(color: Color(0xFFFf4f5a)), ),
 
 

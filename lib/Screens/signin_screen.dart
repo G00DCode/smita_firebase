@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:smita_firebase/Screens/forgot_passoword.dart';
 import 'package:smita_firebase/Screens/homescreen.dart';
-import 'package:smita_firebase/Screens/login.dart';
 import 'package:smita_firebase/Screens/signup_screen.dart';
 import 'package:smita_firebase/Widgets/uihelper.dart';
 
@@ -66,7 +65,7 @@ class _SignInScreenState extends State<SignInScreen> {
           }, child: Text("Sign In"))   ,
         SizedBox(height: 15,),
         TextButton(onPressed: (){
-          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>LogInScreen()));
+          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>SignUp()));
         }, child: Text("Create Account"))
         ],
       ),
